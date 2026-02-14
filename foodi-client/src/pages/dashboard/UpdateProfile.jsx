@@ -49,7 +49,7 @@ const UpdateProfile = () => {
 
           <input type="text" {...register("photoURL")} placeholder="photoURL" className="input input-bordered" required />
           
-          {/* TODO: Uplodaing image will be later */}
+          {/* TODO: Uploading image will be later */}
           {/* <input type="file" className="file-input w-full max-w-xs" /> */}
         </div>
         <div className="form-control mt-6">

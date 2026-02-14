@@ -36,6 +36,36 @@ const Footer = () => {
         <aside className="items-center grid-flow-col">
           <p>Copyright © 2023 - All right reserved</p>
         </aside>
+        <nav className="md:place-self-center md:justify-self-center">
+          <a
+            href="https://chilekotha.top"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl border border-base-content/10 bg-base-100 hover:bg-base-content/5 hover:border-green/30 hover:shadow-md transition-all duration-300 group"
+            aria-label="Visit Chilekotha - Tech Partner"
+          >
+            <span className="text-xs font-medium uppercase tracking-wider text-base-content/50 group-hover:text-green transition-colors">
+              Tech Partner
+            </span>
+            <img
+              src="/images/chilekotha-logo.png"
+              alt="chilekotha"
+              className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+            <span className="text-sm font-medium text-green group-hover:underline decoration-green/60">
+              chilekotha.top
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 text-base-content/40 group-hover:text-green group-hover:translate-x-0.5 transition-all"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </nav>
         <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
           <a>
             <svg

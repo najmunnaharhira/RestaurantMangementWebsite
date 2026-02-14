@@ -71,7 +71,7 @@ const Login = () => {
             navigate("/");
           });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
   return (
     <div className="max-w-md bg-white shadow w-full mx-auto flex items-center justify-center my-20">

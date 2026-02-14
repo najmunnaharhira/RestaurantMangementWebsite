@@ -59,7 +59,7 @@ const updateMenuItem = async (req, res) => {
     try {
         const updatedMenu = await Menu.findByIdAndUpdate(menuId, 
             { name, recipe, image, category, price}, 
-            {new: true, runValidator: true}
+            {new: true, runValidators: true}
             );
 
         if(!updatedMenu) {

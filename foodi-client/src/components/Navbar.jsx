@@ -4,13 +4,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { AuthContext } from "../contexts/AuthProvider";
 
-// import logo from "/logo.png";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
 
   const {user} = useContext(AuthContext);
-  console.log(user)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -108,7 +106,7 @@ const Navbar = () => {
             </ul>
           </div>
           <a href="/">
-            <img src={logo} alt="" />
+            <img src="/logo.png" alt="Foodi logo" />
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">

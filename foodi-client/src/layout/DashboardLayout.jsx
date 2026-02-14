@@ -11,7 +11,6 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-import logo from "/logo.png";
 import { FaCartShopping } from "react-icons/fa6";
 import Login from "../components/Login";
 import useAdmin from "../hooks/useAdmin";
@@ -71,7 +70,7 @@ const DashboardLayout = () => {
           {/* Sidebar content here */}
           <li>
             <Link to="/dashboard" className="flex justify-start mb-3">
-              <img src={logo} alt="" className="w-20" />
+              <img src="/logo.png" alt="Foodi" className="w-20" />
               <span className="badge badge-primary">admin</span>
             </Link>
           </li>

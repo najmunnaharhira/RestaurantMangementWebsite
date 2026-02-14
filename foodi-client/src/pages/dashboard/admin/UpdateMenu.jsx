@@ -8,7 +8,6 @@ import { FaUtensils } from 'react-icons/fa';
 
 const UpdateMenu = () => {
     const item = useLoaderData();
-    console.log(item);
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();

@@ -25,7 +25,7 @@ const Modal = () => {
     // console.log(email, password)
     login(email, password).then((result) => {
       const user = result.user;
-      alert("Login successfull");
+      alert("Login successful");
       document.getElementById("my_modal_5").close()
       navigate(from, {replace: true})
     }).catch((error) => {
@@ -38,9 +38,9 @@ const Modal = () => {
     const handleLogin = () => {
       signUpWithGmail().then((result) => {
         const user = result.user;
-        alert("Login successfull!")
+        alert("Login successful!")
         navigate(from, {replace: true})
-      }).catch((error) => console.log(error))
+      }).catch((error) => console.error(error))
     }
   return (
     <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">

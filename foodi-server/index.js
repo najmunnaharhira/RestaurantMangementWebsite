@@ -11,24 +11,35 @@ app.use(cors());
 app.use(express.json());
 
 // mongodb configuration using mongoose
+const mongoUri = process.env.DB_URI ||
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@domo-foodi-client.eqs1v9d.mongodb.net/demo-foodi-client?retryWrites=true&w=majority`;
 
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@domo-foodi-client.eqs1v9d.mongodb.net/demo-foodi-client?retryWrites=true&w=majority`
-  )
-  .then(
-    console.log("MongoDB Connected Successfully!")
-  )
-  .catch((error) => console.log("Error connecting to MongoDB", error));
-
-  // jwt authentication
-  app.post('/jwt', async(req, res) => {
-    const user = req.body;
-    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: '1hr'
-    })
-    res.send({token});
+  .connect(mongoUri)
+  .then(() => {
+    console.log("MongoDB Connected Successfully!");
   })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB", error);
+  });
+
+// jwt authentication
+app.post('/jwt', async (req, res) => {
+  try {
+    const user = req.body;
+    const secret = process.env.ACCESS_TOKEN_SECRET;
+    if (!secret) {
+      return res.status(500).json({ message: "Server misconfiguration: ACCESS_TOKEN_SECRET not set" });
+    }
+    if (!user || typeof user !== 'object') {
+      return res.status(400).json({ message: "Invalid request body" });
+    }
+    const token = jwt.sign(user, secret, { expiresIn: '1hr' });
+    res.send({ token });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 //   import routes here
@@ -43,6 +54,15 @@ app.get("/", (req, res) => {
   res.send("Hello Foodi Client Server!");
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+const server = app.listen(port, () => {
+  console.log(`Foodi server listening on port ${port}`);
+});
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Port ${port} is already in use. Stop the other process or set PORT to a different value.`);
+  } else {
+    console.error("Server error:", err);
+  }
+  process.exit(1);
 });

@@ -9,8 +9,7 @@ const useAdmin = () => {
     const { refetch, data: isAdmin, isPending: isAdminLoading} = useQuery({
         queryKey: [user?.email, 'isAdmin'],
         queryFn: async () => {
-           const res = await axiosSecure.get(`users/admin/${user?.email}`)
-           console.log(res.data)
+           const res = await axiosSecure.get(`/users/admin/${user?.email}`)
             return res.data?.admin;
         }
     })

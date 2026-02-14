@@ -13,9 +13,9 @@ const cartSchema = new Schema({
     image: String, 
     price: Number,
     quantity: Number,
-    email:{
+    email: {
         type: String,
-        true: true,
+        trim: true,
         required: true,
     }
 })

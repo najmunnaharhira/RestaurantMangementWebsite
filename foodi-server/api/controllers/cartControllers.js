@@ -1,17 +1,18 @@
 const Carts = require("../models/Carts");
 
 // get carts using email
-const getCartByEmail = async(req, res) => {
-    try {
-        const email = req.query.email;
-        // console.log(email);
-        const query = {email: email};
-        const result = await Carts.find(query).exec();
-        res.status(200).json(result)
-    } catch (error) {
-        res.status(500).json({message: error.message});
+const getCartByEmail = async (req, res) => {
+  try {
+    const email = req.query.email;
+    if (!email) {
+      return res.status(400).json({ message: "Email query parameter is required" });
     }
-}
+    const result = await Carts.find({ email }).exec();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // post a cart when add-to-cart btn clicked 
 const addToCart = async(req, res) => {
@@ -42,7 +43,7 @@ const deleteCart =  async (req, res) => {
     try {
         const deletedCart = await Carts.findByIdAndDelete(cartId);
         if(!deletedCart){
-            return res.status(401).json({message: "Cart Items not found!"})
+            return res.status(404).json({message: "Cart item not found!"})
         }
         res.status(200).json({message: "Cart Item Deleted Successfully!"})
         
@@ -51,14 +52,15 @@ const deleteCart =  async (req, res) => {
     }
 };
 
-// updata a cart item
+// update a cart item (supports partial update e.g. quantity only)
 const updateCart = async (req, res) => {
     const cartId = req.params.id;
-    const {menuItemId, name, recipe, image, price, quantity,email } = req.body;
+    const updates = { ...req.body };
+    delete updates._id;
 
     try {
         const updatedCart = await Carts.findByIdAndUpdate(
-            cartId, {menuItemId, name, recipe, image, price, quantity,email }, {
+            cartId, updates, {
                 new: true, runValidators: true
             }
         )

@@ -9,7 +9,6 @@ import axios from "axios";
 const CartPage = () => {
   const { user } = useContext(AuthContext);
   const [cart, refetch] = useCart();
-  console.log(cart)
   const [cartItems, setCartItems] = useState([]);
   // console.log(cartItems)
 
@@ -174,7 +173,7 @@ const CartPage = () => {
                       <input
                         type="number"
                         value={item.quantity}
-                        onChange={() => console.log(item.quantity)}
+                        readOnly
                         className="w-10 mx-2 text-center overflow-hidden appearance-none"
                       />
                       <button
@@ -218,7 +217,7 @@ const CartPage = () => {
               <span id="total-price">${orderTotal.toFixed(2)}</span>
             </p>
             <button className="btn btn-md bg-green text-white px-8 py-1">
-              Procceed to Checkout
+              Proceed to Checkout
             </button>
           </div>
         </div>
